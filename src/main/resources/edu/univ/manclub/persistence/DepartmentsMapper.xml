@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.univ.manclub.persistence.DepartmentsMapper">
+    <insert id="insertDepartment" parameterType="Departments">
+    	INSERT INTO `departments`
+    	(`departmentID`,`name`)
+    	VALUES
+    	(#{departmentID},#{name})
+    </insert>
+    <update id="updateDepartment" parameterType="Departments">
+    	UPDATE `departments` SET `name`=#{name}
+    	WHERE `departmentID`=#{departmentID}
+    </update>
+    <delete id="deleteDepartment" parameterType="int">
+    	DELETE
+    	FROM `departments`
+    	WHERE `departmentID`=#{departmentID}
+    </delete>
+</mapper>

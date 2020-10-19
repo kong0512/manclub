@@ -1,0 +1,125 @@
+<!--?xml version="1.0" encoding="UTF-8"?-->  
+<!DOCTYPE tiles-definitions PUBLIC  
+	"-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  
+	"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">  
+<tiles-definitions>
+    <!-- Layout -->
+	<definition name="baseLayout" template="/WEB-INF/views/layout/basicTemplate.jsp">  
+		<put-attribute name="title" value="UNIV CLUB MANAGEMENT" />
+		<put-attribute name="header" value="/WEB-INF/views/layout/header-login.jsp" />  
+		<put-attribute name="body" value="" />  
+		<put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp" />  
+	</definition>
+	<definition name="mainTemplate" template="/WEB-INF/views/layout/mainTemplate.jsp">  
+		<put-attribute name="title" value="UNIV CLUB MANAGEMENT" />
+		<put-attribute name="header" value="/WEB-INF/views/layout/header.jsp" />  
+		<put-attribute name="navigation" value="/WEB-INF/views/layout/navigation-main.jsp" />  
+		<put-attribute name="body" value="" />  
+		<put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp" />  
+	</definition>
+	
+	<!-- Login -->
+	<definition name="login" extends="baseLayout">
+	    <put-attribute name="title" value="UNIV CLUB MANAGEMENT" />
+		<put-attribute name="body" value="/WEB-INF/views/login.jsp" /> 
+	</definition>
+	<definition name="denied" extends="baseLayout">
+	    <put-attribute name="title" value="UNIV CLUB MANAGEMENT" />
+		<put-attribute name="body" value="/WEB-INF/views/denied.jsp" /> 
+	</definition>
+	<definition name="registerForm" extends="baseLayout">  
+		<put-attribute name="title" value="UNIV CLUB MANAGEMENT" />
+		<put-attribute name="body" value="/WEB-INF/views/register.jsp" />  
+	</definition>
+	
+	<!-- Main -->
+	<definition name="univclub" extends="mainTemplate">
+		<put-attribute name="title" value="UNIV CLUB MANAGEMENT" />
+		<put-attribute name="navigation" value="/WEB-INF/views/layout/navigation-main.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/notice/notice.jsp" />
+	</definition>
+	
+	<!-- Clubs -->
+	<definition name="listClubs" extends="mainTemplate">  
+		<put-attribute name="title" value="UNIV CLUB MANAGEMENT" />
+		<put-attribute name="navigation" value="/WEB-INF/views/layout/navigation-club.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/club/listClubs.jsp" />
+	</definition>
+	<definition name="createClub" extends="mainTemplate">  
+		<put-attribute name="title" value="UNIV CLUB MANAGEMENT" />
+		<put-attribute name="navigation" value="/WEB-INF/views/layout/navigation-club.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/club/createClub.jsp" />
+	</definition>
+	<definition name="myClubs" extends="mainTemplate">  
+		<put-attribute name="title" value="UNIV CLUB MANAGEMENT" />
+		<put-attribute name="navigation" value="/WEB-INF/views/layout/navigation-club.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/club/myClubs.jsp" />
+	</definition>
+	<definition name="retrieveClub" extends="mainTemplate">  
+		<put-attribute name="title" value="UNIV CLUB MANAGEMENT" />
+		<put-attribute name="navigation" value="/WEB-INF/views/layout/navigation-club.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/club/retrieveClub.jsp" />
+	</definition>
+	<definition name="visitClub" extends="mainTemplate">  
+		<put-attribute name="title" value="UNIV CLUB MANAGEMENT" />
+		<put-attribute name="navigation" value="/WEB-INF/views/layout/navigation-club.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/club/visitClub.jsp" />
+	</definition>
+	
+	<definition name="manageMyClub" extends="mainTemplate">  
+		<put-attribute name="title" value="UNIV CLUB MANAGEMENT" />
+		<put-attribute name="navigation" value="/WEB-INF/views/layout/navigation-club.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/club/manageMyClub.jsp" />
+	</definition>
+	<definition name="searchedClub" extends="mainTemplate">  
+		<put-attribute name="title" value="UNIV CLUB MANAGEMENT" />
+		<put-attribute name="navigation" value="/WEB-INF/views/layout/navigation-club.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/club/searchedClub.jsp" />
+	</definition>
+	
+	<!-- Association -->
+	<definition name="manageAssociation" extends="mainTemplate">  
+		<put-attribute name="title" value="UNIV CLUB MANAGEMENT" />
+		<put-attribute name="navigation" value="/WEB-INF/views/layout/navigation-association.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/association/manageAssociation.jsp" />
+	</definition>
+	<definition name="manageClubs" extends="mainTemplate">  
+		<put-attribute name="title" value="UNIV CLUB MANAGEMENT" />
+		<put-attribute name="navigation" value="/WEB-INF/views/layout/navigation-association.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/association/manageClubs.jsp" />
+	</definition>
+	<definition name="viewClub" extends="mainTemplate">  
+		<put-attribute name="title" value="UNIV CLUB MANAGEMENT" />
+		<put-attribute name="navigation" value="/WEB-INF/views/layout/navigation-association.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/association/viewClub.jsp" />
+	</definition>
+	
+	<definition name="addMember" extends="mainTemplate">  
+		<put-attribute name="title" value="UNIV CLUB MANAGEMENT" />
+		<put-attribute name="navigation" value="/WEB-INF/views/layout/navigation-association.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/association/addMember.jsp" />
+	</definition>
+	<definition name="setMemberGrade" extends="mainTemplate">  
+		<put-attribute name="title" value="UNIV CLUB MANAGEMENT" />
+		<put-attribute name="navigation" value="/WEB-INF/views/layout/navigation-association.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/association/setMemberGrade.jsp" />
+	</definition>
+		
+	<!-- In Progress -->
+	<definition name="meeting" extends="mainTemplate">  
+		<put-attribute name="title" value="UNIV CLUB MANAGEMENT" />
+		<put-attribute name="navigation" value="/WEB-INF/views/layout/navigation-association.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/inprogress.jsp" />
+	</definition>
+	<definition name="voting" extends="mainTemplate">  
+		<put-attribute name="title" value="UNIV CLUB MANAGEMENT" />
+		<put-attribute name="navigation" value="/WEB-INF/views/layout/navigation-association.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/inprogress.jsp" />
+	</definition>
+	<definition name="facilities" extends="mainTemplate">  
+		<put-attribute name="title" value="UNIV CLUB MANAGEMENT" />
+		<put-attribute name="navigation" value="/WEB-INF/views/layout/navigation-association.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/inprogress.jsp" />
+	</definition>
+
+</tiles-definitions>  

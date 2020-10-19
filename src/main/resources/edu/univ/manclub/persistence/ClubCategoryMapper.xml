@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.univ.manclub.persistence.ClubCategoryMapper">
+    <insert id="insertCategory" parameterType="ClubCategory">
+    INSERT INTO `club_category`
+    (`categoryID`,`category_name`)
+    VALUES
+    (#{categoryID},#{category_name})
+    </insert>
+    
+    <update id="updateCategory" parameterType="ClubCategory">
+    UPDATE `club_category` SET `category_name`=#{category_name}
+    WHERE `categoryID`=#{categoryID}
+    </update>
+    
+    <delete id="deleteCategory" parameterType="int">
+    DELETE 
+    FROM `club_category`
+    WHERE `categoryID`=#{categoryID} 
+    </delete>
+    
+    <select id="getAllCategory" resultType="ClubCategory">
+    SELECT * 
+    FROM `club_category`
+     </select>
+</mapper>

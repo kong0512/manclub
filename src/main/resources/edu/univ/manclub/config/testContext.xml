@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd ">  
+	
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+        destroy-method="close">
+	  <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+	  <property name="url" value="jdbc:mysql://localhost/club?autoReconnect=true" />
+	  <property name="username" value="club" />
+	  <property name="password" value="club" />
+	</bean>
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="typeAliasesPackage" value="edu.univ.manclub.domain" />
+	</bean>
+
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>
+	
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="edu.univ.manclub.persistence"/>
+    </bean>
+	
+	<!-- List of Service Beans for testing -->
+	<bean id="StudentsService" class="edu.univ.manclub.service.StudentsService" />
+	<bean id="DepartmentsService" class="edu.univ.manclub.service.DepartmentsService" />
+	<bean id="ClubsService" class="edu.univ.manclub.service.ClubsService" />
+	<bean id="ClubCategoryService" class="edu.univ.manclub.service.ClubCategoryService"/>
+</beans>

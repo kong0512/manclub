@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.univ.manclub.persistence.StudentsMapper">
+    <insert id="insertStudent" parameterType="Students">
+        INSERT INTO `students`
+        (`studentID`, `password`, `name`, `department`, `cellphone`, `email`, `level`, `association`)
+        VALUES
+        (#{studentID},#{password},#{name},#{department},#{cellphone},#{email},#{level},#{association})
+    </insert>
+    
+    <select id="getStudentByStudentID" parameterType="String" resultType="Students">
+        SELECT *
+        FROM `students`
+        WHERE `studentID`=#{studentID}
+    </select>
+    
+    <select id="getAllStudents" resultType="Students">
+        SELECT *
+        FROM `students`
+    </select>
+    
+    <select id="getAllStudentsByClubID" parameterType="String" resultType="Students">
+    	SELECT students.studentID, students.password, students.name, students.department, students.cellphone, students.email, students.level, students.association
+    	FROM students,joined_list
+    	WHERE joined_list.clubID=#{clubID} and students.studentID=joined_list.studentID 
+    </select>
+    
+    <select id="getExcutiveStudentsByClubID" parameterType="String" resultType="Students">
+    	SELECT students.studentID, students.password, students.name, students.department, students.cellphone, students.email, students.level, students.association
+    	FROM students,joined_list
+    	WHERE joined_list.clubID=#{clubID} and students.studentID=joined_list.studentID and joined_list.member_grade > 1 
+    </select>
+    
+    <select id="getStudentsInAssosiation" resultType="Students">
+    	SELECT *
+    	FROM `students`
+    	WHERE `association`>=1
+    </select>
+    
+    <delete id="deleteStudentByStudentID" parameterType="String">
+        DELETE FROM `students`
+        WHERE `studentID`=#{studentID}
+    </delete>
+    
+    <update id="updateStudent" parameterType="Students">
+        UPDATE `students` 
+        SET `studentID`=#{studentID},`password`=#{password},`name`=#{name},`department`=#{department},`cellphone`=#{cellphone},`email`=#{email},`level`=#{level},`association`=#{association}
+        WHERE `studentID`=#{studentID}
+    </update>
+    
+    <update id="updateStudentToJoinedList" parameterType="JoinedList">
+        UPDATE `joined_list` 
+        SET `registerID`=#{registerID},`studentID`=#{studentID},`clubID`=#{clubID},`member_grade`=#{member_grade}
+        WHERE `registerID`=#{registerID}
+    </update>
+    
+     <delete id="deleteStudentToJoinedList" parameterType="String">
+        DELETE FROM `joined_list`
+        WHERE `registerID`=#{registerID}
+    </delete>
+    
+    <insert id="insertStudentToJoinedList" parameterType="JoinedList">
+    INSERT INTO `joined_list`
+    	(`registerID`, `studentID`, `clubID`, `member_grade`)
+    VALUES
+  		(#{registerID},#{studentID},#{clubID},#{member_grade})
+  	
+  	    
+    </insert>
+  	
+  	
+  	
+   <select id="getRegisteringStudentByClubID" parameterType="String" resultType="Students">
+    	SELECT `students`.studentID, `students`.password, `students`.name, `students`.department, `students`.cellphone, `students`.email, `students`.level, `students`.association
+    	FROM `students`,`joined_list`
+    	WHERE `joined_list`.clubID=#{clubID} and `joined_list`.studentID=`students`.studentID
+    </select>
+    
+     <select id="getJoinedListByRegisterID" parameterType="String" resultType="JoinedList">
+    	SELECT *
+    	FROM `joined_list`
+    	WHERE `registerID`=#{registerID}
+    </select>
+
+     <select id="getJoinedListByStudentID" parameterType="String" resultType="JoinedList">
+        SELECT *
+        FROM `joined_list`
+        WHERE `studentID`=#{studentID}
+    </select>
+  
+  
+    <select id="getStudentOutAssosiation" resultType="Students">
+    	SELECT *
+    	FROM `students`
+    	WHERE `association`=0
+    </select>
+    
+    <update id="updateStudentAssociation"  parameterType="Students">
+    	UPDATE `students`
+    	SET `association`= 7
+    	WHERE `studentID`=#{studentID}
+    </update>
+    <update id="modifyStudentAssociation" parameterType="Students">
+    	UPDATE `students`
+    	SET `association` = #{association}
+    	WHERE `studentID` = #{studentID}
+    </update>
+    </mapper>

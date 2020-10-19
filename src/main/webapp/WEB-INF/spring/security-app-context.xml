@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                    http://www.springframework.org/schema/security 
+                    http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+	<!-- Added for Spring OAuth security -->
+	<!-- bean for UserService  -->
+	<beans:bean id="UserService" class="edu.univ.manclub.service.UserService"></beans:bean>
+	
+    <!-- START   IS_AUTHENTICATED_ANONYMOUSLY-->
+	<http>
+	    <intercept-url pattern="/resources/dist/css/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+	    <intercept-url pattern="/resources/dist/images/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+	    <intercept-url pattern="/resources/dist/fonts/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+	    <intercept-url pattern="/resources/dist/js/jquery-1.6.4.js" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+	    <intercept-url pattern="/login" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+	    <intercept-url pattern="/registerForm" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+	    <intercept-url pattern="/registerStudent" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+	    <intercept-url pattern="/denied" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+	    <intercept-url pattern="/main/univclub" access="ROLE_MEMBER, ROLE_ASSOCIATION, ROLE_NEWMEMBER" />
+	    <intercept-url pattern="/club/listClubs" access="ROLE_MEMBER, ROLE_ASSOCIATION, ROLE_NEWMEMBER"/>
+	    <intercept-url pattern="/club/createClub" access="ROLE_MEMBER, ROLE_ASSOCIATION, ROLE_NEWMEMBER"/>
+	    <intercept-url pattern="/club/registerClub" access="ROLE_MEMBER, ROLE_ASSOCIATION, ROLE_NEWMEMBER"/>
+	    <intercept-url pattern="/club/askToJoinClub/**" access="ROLE_MEMBER, ROLE_ASSOCIATION, ROLE_NEWMEMBER"/>
+	    <intercept-url pattern="/club/retrieveClub/**" access="ROLE_MEMBER, ROLE_ASSOCIATION, ROLE_NEWMEMBER"/>
+	    <intercept-url pattern="/club/visitClub/**" access="ROLE_MEMBER, ROLE_ASSOCIATION, ROLE_NEWMEMBER"/>
+	    <intercept-url pattern="/club/myClubs" access="ROLE_MEMBER, ROLE_ASSOCIATION, ROLE_NEWMEMBER"/>
+	    <intercept-url pattern="/club/searchedClub" access="ROLE_MEMBER, ROLE_ASSOCIATION, ROLE_NEWMEMBER"/>
+	    <intercept-url pattern="/association/manageAssociation" access="ROLE_MEMBER, ROLE_ASSOCIATION, ROLE_NEWMEMBER" />
+	    <intercept-url pattern="/association/**" access="ROLE_ASSOCIATION" />
+	    <intercept-url pattern="**" access="ROLE_MEMBER, ROLE_ASSOCIATION" />
+	    
+		<form-login
+		    authentication-failure-url="/denied"
+		    login-page='/login'
+		    default-target-url='/main/univclub'
+		    always-use-default-target='true' />
+		<logout logout-success-url="/login" />
+		<!-- <http-basic /> -->
+	</http>
+	
+	<authentication-manager>
+    	<authentication-provider user-service-ref="UserService" />
+	</authentication-manager>
+	
+	
+	<!-- END here -->
+	
+</beans:beans>   

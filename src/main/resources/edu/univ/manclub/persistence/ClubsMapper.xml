@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.univ.manclub.persistence.ClubsMapper">
+
+ 	<select id="getAllClubs" resultType="Clubs">
+		SELECT *
+		FROM `clubs`
+	</select>
+	
+ 	<select id="getAllAcceptedClubs" resultType="Clubs">
+ 	    SELECT *
+ 	    FROM `clubs`
+ 	    WHERE `accepted`=1
+ 	</select>
+
+	<select id="getAskAcceptClubs" resultType="Clubs">
+		SELECT *
+		FROM `clubs`
+		WHERE accepted = 0
+	</select>
+	
+	<select id="getClubByClubID" parameterType="String" resultType="Clubs">
+		SELECT *
+		FROM `clubs`
+		WHERE `clubID`= #{clubID}
+	</select>
+	
+	<select id="getClubByClubName" parameterType="String" resultType="Clubs">
+		SELECT *
+		FROM `clubs`
+		WHERE `club_name` LIKE CONCAT('%',#{club_name},'%') AND `accepted`=1
+	</select>
+	
+	<select id="getClubsByStudentID" parameterType="String" resultType="Clubs">
+    	SELECT `clubs`.clubID, `clubs`.club_name, `clubs`.created_date, `clubs`.club_information, `clubs`.club_category, `clubs`.accepted
+    	FROM `clubs`,`joined_list`
+    	WHERE `joined_list`.studentID=#{studentID} and `joined_list`.clubID=`clubs`.clubID and `joined_list`.member_grade>0
+    </select>
+	
+
+	<insert id="insertClub" parameterType="Clubs">
+        INSERT INTO `clubs`
+        (`clubID`, `club_name`, `created_date`, `club_information`,`club_category`, `accepted`)
+        VALUES
+        (#{clubID},#{club_name},#{created_date},#{club_information},#{club_category},#{accepted})
+    </insert>
+    
+    <update id="updateClub" parameterType="Clubs">
+    	UPDATE `clubs` SET  `club_name`=#{club_name}, `created_date`=#{created_date}
+    	 ,`club_information`=#{club_information},`club_category`=#{club_category}, `accepted`=#{accepted} 
+    	WHERE `clubID`=#{clubID}
+    </update>
+    
+    <delete id="deleteClub" parameterType="String">
+    DELETE 
+    FROM `clubs`
+    WHERE `clubID`=#{clubID}    
+    </delete>
+    
+    <select id="getJoinedListByClubID" parameterType="String" resultType="JoinedList">
+        SELECT *
+        FROM `joined_list`
+        WHERE `clubID`=#{clubID}
+    </select>
+    
+</mapper>
